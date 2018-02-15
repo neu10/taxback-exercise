@@ -1,0 +1,27 @@
+.container
+    .row
+        .card.col.m8.s12.offset-m2(*ngIf='transactionDetails')
+            .card-content.center
+                .card-title
+                .row
+                    a.col.s6.materialize-red-text.left-align(href='javascript:window.history.go(-1)')
+                        i.fa.fa-chevron-left
+                        span Back
+                    .col.s6.left-align
+                        h6 User :
+                            strong  {{user}}
+                        h6 Transaction id :
+                            strong  {{transactionDetails.id}}
+                hr
+                .row
+                    h6.col.s6 Transaction id
+                    strong.col.s6  {{transactionDetails.id}}
+                .row
+                    h6.col.s6 Date
+                    strong.col.s6  {{transactionDetails.txn_date | date:'dd-MMM-yyyy'}}
+                .row
+                    h6.col.s6 Amount
+                    strong.col.s6  {{transactionDetails.amount}}
+                .row
+                    h6.col.s6 Currency
+                    strong.col.s6  {{transactionDetails.currency}}

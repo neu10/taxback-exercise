@@ -1,0 +1,7 @@
+{
+  "short_name": "Taxback",
+  "name": "taxback",
+  "start_url": "http://localhost:4000/",
+  "display": "standalone",
+  "orientation": "portrait"
+}
