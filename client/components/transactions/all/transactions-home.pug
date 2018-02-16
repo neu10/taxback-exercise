@@ -11,8 +11,9 @@
                         a.col.s3.offset-s1.btn.green(name="addTransaction", (click)="addUserTransaction(selectedUser)" ) Add transaction
     div(*ngIf='showingAddForm')
         add-transaction([user]='selectedUser', (addedTransaction)= 'hideAddForm($event)')
-    div(*ngIf='showingEditForm && selectedTransactionToEdit')
-        edit-transaction([user]='selectedUser', [transaction]='selectedTransactionToEdit', (editedTransaction) ='hideEditForm($event)')
+    div(#editForm='')
+        .card(*ngIf='showingEditForm && selectedTransactionToEdit')
+            edit-transaction([user]='selectedUser', [transaction]='selectedTransactionToEdit', (editedTransaction) ='hideEditForm($event)')
     .card(*ngIf='noTransactionsForUser && !showingAddForm')
         .card-content
             .card-title
@@ -39,7 +40,7 @@
                         td {{transaction.currency}}
                         td
                             i.fa.fa-eye.offset-s1.text-primary.purple-text.text-darken-3((click)='viewTransaction(transaction)', title='View')
-                            i.fa.fa-pencil.offset-s1.blue-text.text-darken-3((click)='editTransaction(transaction)', title='Edit')
+                            i.fa.fa-pencil.offset-s1.blue-text.text-darken-3((click)='editTransaction(transaction,editForm)', title='Edit')
                             i.fa.fa-trash.offset-s1.materialize-red-text.text-darken-3((click)='confirmDeleteTransaction(transaction)', title='Delete')
 #confirmationModal.modal
     .modal-content

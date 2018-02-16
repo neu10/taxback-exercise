@@ -1,21 +1,20 @@
-.card
-    .card-content
-        .card-title
-            | Edit transaction
-        .row
-            form.col.s12.clearfix
-                .input-field.col.s6
-                    input.col.form-control#txnId(type='text', disabled='true', name="txnId", [(ngModel)] = 'transaction.id')
-                    label(for='txnId', [class.active]='transaction.id') Transaction id
-                .input-field.col.s6
-                    input.col.form-control#amount(type='text', name="amount", [(ngModel)] = 'transaction.amount')
-                    label(for='amount', [class.active]='transaction.amount') Amount
-                .col.s6.input-field
-                    input.col.s8(mdInput='', [mdDatepicker]="picker", placeholder="Transaction date e.g YYYY-MM-DD", name="dateTxn", [(ngModel)] = 'transaction.txn_date')
-                    md-datepicker-toggle.col.s4(mdSuffix='', [for]="picker")
-                    md-datepicker(#picker='')
-                .col.s6
-                    md-select#currencies(name='curr', [(ngModel)]='transaction.currency')
-                        md-option.float-right(*ngFor='let currency of currencies', [value]='currency.name') {{currency.name}}
-                .center.clearfix
-                    button.btn.teal(name="addTransaction", (click)="updateTransaction(transaction)" ) Save
+.card-content
+    .card-title
+        | Edit transaction
+    .row
+        form.col.s12.clearfix
+            .input-field.col.s6
+                input.col.form-control#txnId(type='text', disabled='true', name="txnId", [(ngModel)] = 'transaction.id')
+                label(for='txnId', [class.active]='transaction.id') Transaction id
+            .input-field.col.s6
+                input.col.form-control#amount(type='text', name="amount", [(ngModel)] = 'transaction.amount')
+                label(for='amount', [class.active]='transaction.amount') Amount
+            .col.s6.input-field
+                input.col.s8(mdInput='', [mdDatepicker]="picker", placeholder="Transaction date e.g YYYY-MM-DD", name="dateTxn", [(ngModel)] = 'transaction.txn_date')
+                md-datepicker-toggle.col.s4(mdSuffix='', [for]="picker")
+                md-datepicker(#picker='')
+            .col.s6
+                md-select#currencies(name='curr', [(ngModel)]='transaction.currency')
+                    md-option.float-right(*ngFor='let currency of currencies', [value]='currency.name') {{currency.name}}
+            .center.clearfix
+                button.btn.teal(name="addTransaction", (click)="updateTransaction(transaction)" ) Save

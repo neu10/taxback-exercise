@@ -51,10 +51,11 @@ export class TransactionsComponent {
         this.router.navigateByUrl(url);
     }
 
-    editTransaction(txn){
+    editTransaction(txn,el){
         this.showingAddForm = false;
         this.showingEditForm = true;
         this.selectedTransactionToEdit = txn;
+        el.scrollIntoView();
         //let url = '/transactions/'+txn.id;
         // this.router.navigateByUrl(url);
     }
