@@ -10,11 +10,14 @@
                 .input-field.col.s6
                     input.col.form-control#amount(type='text', name="amount", [(ngModel)] = 'transactionDetails.amount')
                     label(for='amount') Amount
-                .input-field.col.s6
-                    input.col.form-control.datepicker#dateTxn(type='text', name="txnId", [(ngModel)] = 'transactionDetails.txn_date')
-                    label(for='dateTxn') Date of Transaction
-                .col.s6
-                    md-select#currencies(name='currency', [(ngModel)]='transactionDetails.currency')
+                .col.s6.input-field
+                    input.col.s8(mdInput='', [mdDatepicker]="picker", placeholder="Transaction date e.g YYYY-MM-DD", name="txnIDate", [(ngModel)] = 'transactionDetails.txn_date')
+                    md-datepicker-toggle.col.s4(mdSuffix='', [for]="picker")
+                    md-datepicker(#picker='')
+                    //input.col.form-control.datepicker#dateTxn(type='text', name="txnId", [(ngModel)] = 'transactionDetails.txn_date')
+                    //label(for='dateTxn') Date of Transaction
+                .col.s6.clearfix
+                    md-select#currencies(name='currency', [(ngModel)]='transactionDetails.currency', placeholder="Currency")
                         md-option.float-right(*ngFor='let currency of currencies', [value]='currency.name') {{currency.name}}
                 .center.clearfix
                     button.btn.teal(name="addTransaction", (click)="addTransaction(transactionDetails)" ) Save

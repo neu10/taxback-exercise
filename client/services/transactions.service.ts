@@ -91,4 +91,18 @@ export class TransactionsService {
 
         return observable;
     }
+
+    deleteTransaction(payload) {
+        let data = {
+            'url' : '/deleteTransaction',
+            'data': payload
+        };
+        console.log(data);
+        let observable;
+        observable = this.http.post(data).map((response: any) => {
+            return response
+        });
+
+        return observable;
+    }
 }

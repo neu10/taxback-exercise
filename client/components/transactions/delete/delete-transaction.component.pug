@@ -1,0 +1,9 @@
+.modal-header(*ngIf='txn')
+  h5 Are you sure to delete transaction with id {{ txn.id }} ?
+.modal-footer
+  .row
+    .col.s8.right-align
+      .col.s12.m6
+        button.modal-action.modal-close.btn.blue((click)='deleteTxn(true)') Yes, please
+      .col.s12.m6
+        button.modal-action.modal-close.red.btn((click)='deleteTxn(false)') No, thank you

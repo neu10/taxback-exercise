@@ -10,6 +10,9 @@ const APP_ROUTES: Routes = [
     }, {
         path: 'transactions',
         loadChildren: '../../client/modules/transactions/transactions.module#TransactionsModule'
+    }, {
+        path: '**',
+        redirectTo : '/'
     }
 ];
 

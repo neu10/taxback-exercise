@@ -10,9 +10,14 @@
                         a.col.s3.offset-s1.btn.blue(name="getTransaction", (click)="getAllTransactions(selectedUser)" ) Get transactions
                         a.col.s3.offset-s1.btn.green(name="addTransaction", (click)="addUserTransaction(selectedUser)" ) Add transaction
     div(*ngIf='showingAddForm')
-        add-transaction([user]='selectedUser')
+        add-transaction([user]='selectedUser', (addedTransaction)= 'hideAddForm($event)')
     div(*ngIf='showingEditForm && selectedTransactionToEdit')
         edit-transaction([user]='selectedUser', [transaction]='selectedTransactionToEdit', (editedTransaction) ='hideEditForm($event)')
+    .card(*ngIf='noTransactionsForUser && !showingAddForm')
+        .card-content
+            .card-title
+                h6.center-align No transactions found for :-
+                    strong  {{selectedUser}}
     .card(*ngIf='allTransactions && allTransactions.length > 0 && !showingAddForm')
         .card-content
             .card-title
@@ -35,4 +40,7 @@
                         td
                             i.fa.fa-eye.offset-s1.text-primary.purple-text.text-darken-3((click)='viewTransaction(transaction)', title='View')
                             i.fa.fa-pencil.offset-s1.blue-text.text-darken-3((click)='editTransaction(transaction)', title='Edit')
-                            i.fa.fa-trash.offset-s1.materialize-red-text.text-darken-3((click)='deleteTransaction(transaction.id)', title='Delete')
+                            i.fa.fa-trash.offset-s1.materialize-red-text.text-darken-3((click)='confirmDeleteTransaction(transaction)', title='Delete')
+#confirmationModal.modal
+    .modal-content
+        delete-transaction([txn]='selectedTransactionToDelete', (deletionAgreed)='deleteTransaction($event)')

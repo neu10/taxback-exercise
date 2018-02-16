@@ -11,10 +11,12 @@ import {TransactionsService} from "../../../services/transactions.service";
 export class TransactionsComponent {
 
     private allTransactions;
+    private noTransactionsForUser = false;
     private selectedUser = 'priya@gmail.com';
     private showingAddForm: boolean;
     private selectedTransactionToEdit: any;
     private showingEditForm: boolean;
+    private selectedTransactionToDelete: any;
 
     constructor(
         private route: ActivatedRoute,
@@ -31,7 +33,7 @@ export class TransactionsComponent {
         this.transactionService.getAllTransactions(payload).subscribe((response : any)=>{
             if(response && response.status === 200 && !response.data.error){
                 this.allTransactions = response.data;
-                console.log(this.allTransactions);
+                this.noTransactionsForUser = this.allTransactions.length === 0;
             }else{
                 alert('Error while getting all transactions '+JSON.stringify(response.data.error));
             }
@@ -59,11 +61,33 @@ export class TransactionsComponent {
 
     hideEditForm(event){
         if(event){
-           this.showingEditForm = false;
+            this.showingEditForm = false;
         }
     }
 
-    deleteTransaction(id){
+    hideAddForm(event){
+        if(event){
+            this.showingAddForm = false;
+            this.getAllTransactions(this.selectedUser);
+        }
+    }
+
+    confirmDeleteTransaction(txn){
+        this.selectedTransactionToDelete = txn;
+        (<any>$('#confirmationModal')).modal();
+        (<any>$('#confirmationModal')).modal('open');
+    }
+
+    deleteTransaction(val){
+        if(val){
+            this.transactionService.deleteTransaction(this.selectedTransactionToDelete).subscribe((response : any) => {
+                if(response && response.status === 200 && !response.data.error){
+                    this.getAllTransactions(this.selectedUser);
+                }else{
+                    alert('Error while getting deleting transaction '+JSON.stringify(response.data.error));
+                }
+            })
+        }
 
     }
 

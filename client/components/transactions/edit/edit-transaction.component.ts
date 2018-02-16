@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { ActivatedRoute }               from '@angular/router';
 import {TransactionsService} from "../../../services/transactions.service";
+import moment = require("moment");
 
 @Component({
     selector: 'edit-transaction',
@@ -19,9 +20,10 @@ export class EditTransactionComponent {
     ) {
         this.currencies = this.transactionService.getCurrencies();
     }
- 
+
     updateTransaction(data){
         data.user = this.user;
+        data.txn_date =  moment(data.txn_date).format('YYYY-MM-DD');
         this.transactionService.updateUserTransaction(data).subscribe((response : any)=>{
             if(response && response.status === 200 && !response.data.error){
                 this.editedTransaction.emit(true);

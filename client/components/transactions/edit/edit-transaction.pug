@@ -10,9 +10,10 @@
                 .input-field.col.s6
                     input.col.form-control#amount(type='text', name="amount", [(ngModel)] = 'transaction.amount')
                     label(for='amount', [class.active]='transaction.amount') Amount
-                .input-field.col.s6
-                    input.col.form-control.datepicker#dateTxn(type='text', name="dateTxn", [(ngModel)] = 'transaction.date')
-                    label(for='dateTxn', [class.active]='transaction.date') Date of Transaction
+                .col.s6.input-field
+                    input.col.s8(mdInput='', [mdDatepicker]="picker", placeholder="Transaction date e.g YYYY-MM-DD", name="dateTxn", [(ngModel)] = 'transaction.txn_date')
+                    md-datepicker-toggle.col.s4(mdSuffix='', [for]="picker")
+                    md-datepicker(#picker='')
                 .col.s6
                     md-select#currencies(name='curr', [(ngModel)]='transaction.currency')
                         md-option.float-right(*ngFor='let currency of currencies', [value]='currency.name') {{currency.name}}

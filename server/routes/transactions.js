@@ -37,6 +37,7 @@ module.exports = function(app) {
             res.send(err);
         });
     });
+
     app.post('/deleteTransaction', (req, res) => {
         let payload = req.body;
         model.deleteTransaction(payload).then((response) => {
